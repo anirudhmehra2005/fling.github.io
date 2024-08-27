@@ -44,56 +44,7 @@
             background-color: #2b6cb0;
         }
     </style>
-    <script>
-        // Replace with your Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyCLgQZfyNoP9kB7wcHYrxXGpf5EuhHRlYU",
-            authDomain: "fling-dc99d.firebaseapp.com",
-            databaseURL: "https://fling-dc99d-default-rtdb.firebaseio.com",
-            projectId: "fling-dc99d",
-            storageBucket: "fling-dc99d.appspot.com",
-            messagingSenderId: "110170541743",
-            appId: "1:110170541743:web:51fce24d75b422ffdc0e5a",
-            measurementId: "G-2WBR39VH5C"
-        };
-
-        // Initialize Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
-
-        // Function to handle form submission
-        function submitForm(event) {
-            event.preventDefault(); // Prevent default form submission
-
-            const email = document.getElementById('email').value;
-
-            // Validate email
-            if (!validateEmail(email)) {
-                alert('Please enter a valid email address.');
-                return;
-            }
-
-            // Store email in Firebase Realtime Database
-            database.ref('emails').push({
-                email: email
-            }).then(() => {
-                // Clear the form field
-                document.getElementById('email').value = '';
-
-                // Display a success message
-                alert('Email submitted successfully!');
-            }).catch((error) => {
-                console.error('Error writing to database:', error);
-                alert('An error occurred. Please try again later.');
-            });
-        }
-
-        // Email validation function
-        function validateEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(String(email).toLowerCase());
-        }
-    </script>
+    
 </head>
 
 <body>
@@ -142,7 +93,7 @@
     <section id="waitlist" class="py-16 bg-gray-900 text-white text-center">
         <div class="container mx-auto">
             <h2 class="text-3xl font-bold mb-8">Join the Waitlist</h2>
-            <form id="submit-form" onsubmit="submitForm(event)" class="w-full md:w-1/2 mx-auto">
+            <form name="waitlist" method="POST" data-netlify="true" class="w-full md:w-1/2 mx-auto">
                 <input type="email" id="email" name="email" placeholder="Enter your email" required class="w-full p-3 rounded-full text-black mb-4">
                 <button type="submit" class="btn-primary w-full py-3 rounded-full">Join Waitlist</button>
             </form>
